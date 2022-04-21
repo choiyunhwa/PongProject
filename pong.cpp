@@ -4,7 +4,6 @@
 
 using namespace sf;
 
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920,1080), "Pong!",Style::Fullscreen);
@@ -22,7 +21,7 @@ int main()
         Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == Event::Closed)
                 window.close();
         }
         //input
@@ -38,12 +37,15 @@ int main()
         }
         bat.SetMoveDir(dir);
 
-        FloatRect ballBound = ball.GetGlobalBounds();
-        Vector2u windowSize = window.getSize();
+        FloatRect ballBound = ball.GetGlobalBounds(); //좌우상하의 충돌체크
+        Vector2u windowSize = window.getSize(); //윈도우의 할당되어 있는 사이즈
+
+        FloatRect batBound = bat.GetGlobalBounds();
+          
         
         bool colSide = ballBound.left < 0.f || ballBound.left + ballBound.width > windowSize.x;
         bool colTop = ballBound.top < 0.f;
-        bool colBat = ballBound.intersects(bat.GetGlobalBounds());
+        bool colBat = ballBound.intersects(bat.GetGlobalBounds()); //ball과 bat가 충돌
         if (!prevSide && colSide)
         {
             ball.ReboundSides();
@@ -56,7 +58,6 @@ int main()
         {
             ball.ReboundBatOrTop();
         }
-
         else if (ballBound.top + ballBound.height > windowSize.y)
         {
             ball.ReboundBottom();
@@ -66,7 +67,12 @@ int main()
         prevbat = colBat;
         
         //update
-        bat.Update(deltaTime);
+        
+        if (batBound.left > 0.f && batBound.left + batBound.width < windowSize.x)
+        {
+            bat.Update(deltaTime);
+        }
+
         ball.Update(deltaTime);
         //draw
         window.clear();

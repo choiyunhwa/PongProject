@@ -5,14 +5,14 @@ using namespace sf;
 class Ball
 {
 private:
-	Vector2f originalPosition;
+	Vector2f originalPosition; // 원래 시작하는 위치
 	Vector2f position;
 	RectangleShape shape;
 
 	float speed = 500.f;
 	Vector2f dir;
 
-public:
+public:첼로
 	Ball(float x, float y);
 
 	FloatRect GetGlobalBounds();
@@ -22,7 +22,7 @@ public:
 
 	void ReboundBatOrTop(); // 바와 부딪
 
-	void ReboundBottom(); // 아래쪽 넘어감
+	void ReboundBottom(); // 떨어짐
 
 	void Update(float dt);
 

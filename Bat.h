@@ -12,6 +12,7 @@ enum class Sides
 	RIGHT,
 	NONE
 };
+
 class Bat
 {
 private:

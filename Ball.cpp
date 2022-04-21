@@ -3,11 +3,11 @@
 Ball::Ball(float x, float y) 
 	: originalPosition(x,y), position(x,y)
 {
+	//노멀라이즈
 	dir.x = 1.f;
 	dir.y = 1.f;
-
-	//노멀라이즈
-	float length = sqrt(dir.x * dir.x + dir.y * dir.y); //벡터의 길이
+	
+	float length = sqrt(dir.x * dir.x + dir.y * dir.y); //단일 벡터의 길이
 	dir.x /= length;
 	dir.y /= length;
 
